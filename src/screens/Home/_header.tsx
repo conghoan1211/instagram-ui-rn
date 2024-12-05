@@ -17,10 +17,10 @@ function HeaderView() {
                     <ThemedIcon />
                 </View>
                 <View style={styles.icon}>
-                    <IConLink name="heart" library="Feather" dot={true} />
+                    <IConLink name="heart" library="Feather" dot size={25} />
                 </View>
                 <View style={styles.icon}>
-                    <IConLink name="message-circle" library="Feather" badge={1}  />
+                    <IConLink name="message-circle" library="Feather" badge={3} />
                 </View>
             </View>
         </View>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 28,
-        fontFamily: 'Times New Roman',
+        // fontFamily: '',
     },
     icon: {
         marginHorizontal: 10,

@@ -5,7 +5,6 @@ import { Feather } from "@expo/vector-icons";
 import { useTheme } from '../Theme/ThemeContext';
 import { IconLibrary, IconMap } from '../../constants/Const';
 
-
 interface IConProps {
     name: string;
     library: IconLibrary;
@@ -13,12 +12,10 @@ interface IConProps {
     color?: string;
 }
 
-
 const IconBase: React.FC<IConProps> = ({ name, library, size, color }) => {
     const { theme } = useTheme();
 
     const IconComponent = IconMap[library] || Feather;
-
     return (
         <IconComponent
             name={name as any}

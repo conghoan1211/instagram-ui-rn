@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import IconBase from "./IconBase";
 import { useTheme } from "../Theme/ThemeContext";
 import { IconLibrary } from "../../constants/Const";
@@ -6,16 +6,16 @@ import { IconLibrary } from "../../constants/Const";
 interface IconLinkProps {
     name: string;
     library: IconLibrary;
-    badge?: number;  
-    dot?: boolean;   
     size?: number;
+    badge?: number;
+    dot?: boolean;
 }
 
 const IconLink: React.FC<IconLinkProps> = ({ name, library, badge, dot, size }) => {
     const { theme } = useTheme();
 
     return (
-        <View style={styles.icon}>
+        <TouchableOpacity activeOpacity={0.5} style={styles.icon}>
             <IconBase name={name} library={library} size={size} />
 
             {badge !== undefined && badge > 0 && (
@@ -26,10 +26,10 @@ const IconLink: React.FC<IconLinkProps> = ({ name, library, badge, dot, size }) 
                 </View>
             )}
             {dot && !badge && (
-                <View style={[styles.dot, {backgroundColor: theme.color_badge, borderColor: theme.background}]}>
+                <View style={[styles.dot, { backgroundColor: theme.color_badge, borderColor: theme.background }]}>
                 </View>
             )}
-        </View>
+        </TouchableOpacity>
     );
 }
 
@@ -61,10 +61,10 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: -2,
         right: -4,
-        width: 13,
-        height: 13,
+        width: 12,
+        height: 12,
         borderRadius: 1000,
-        borderWidth: 1.2,
+        borderWidth: 2,
     },
 });
 export default IconLink;
