@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, View } from "react-native";
-import glasses from './../../assests/Images/glasses.jpg';
+import glasses from './../../assests/Img/glasses.jpg';
 import StoryItem from "./StoryItem";
 
 const tokenid = '1';
@@ -9,7 +9,7 @@ const DATA = [
     { id: '2', url: glasses, online: true, hasStory: true, readStory: true },
     { id: '3', url: glasses, online: false, hasStory: true, readStory: false },
     { id: '4', url: glasses, online: true, hasStory: true, readStory: false },
-    { id: '5', url: glasses, online: true, hasStory: true, readStory: false },
+    { id: '5', url: undefined, online: true, hasStory: true, readStory: false },
     { id: '6', url: glasses, online: true, hasStory: true, readStory: false },
 
 ];
@@ -24,7 +24,7 @@ const Story = () => {
                     hasStory={item.hasStory}
                     readStory={item.readStory}
                     online={item.online}
-                    me={item.id === tokenid ? true : false}
+                    me={item.id === tokenid}
                 />}
             style={styles.list}>
         </FlatList>
@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
     list: {
         flexDirection: 'row',
         paddingVertical: 4,
+        height: 115,
+        maxHeight: 115,
+
     }
 });
 export default Story;

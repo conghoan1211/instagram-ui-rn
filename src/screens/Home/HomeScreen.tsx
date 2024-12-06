@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import HeaderView from "./_header";
 import { useTheme } from "../../components/Theme/ThemeContext";
-import Stories from "./_stories";
 import Story from "../../components/Stories/Story";
 
 function HomeScreen() {
@@ -12,7 +11,7 @@ function HomeScreen() {
             <HeaderView />
             <Story />
             <View>
-                <Text style={{ fontSize: 30 }}>
+                <Text style={{ fontSize: 30, color: theme.text }}>
                     ascsaadadvdv
                 </Text>
             </View>
@@ -23,6 +22,7 @@ function HomeScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: 45,
 
     }
 });

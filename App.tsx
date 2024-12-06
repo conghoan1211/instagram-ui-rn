@@ -1,17 +1,17 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { ThemeProvider } from "./src/components/Theme/ThemeContext"; // Đường dẫn tuỳ thuộc cấu trúc thư mục
-import HomeScreen from './src/screens/Home/HomeScreen';
+import { ThemeProvider } from "./src/components/Theme/ThemeContext";
+import MainTab from './src/navigation/MainTab';
 
 export default function App() {
-
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ThemeProvider>
-        <HomeScreen />
+        <MainTab />
       </ThemeProvider>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 40,
   }
 });
 

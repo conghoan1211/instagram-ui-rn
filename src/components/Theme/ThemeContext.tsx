@@ -3,20 +3,20 @@ import React, { createContext, useState, useContext } from "react";
 const themes = {
     light: {
         background: "#fff",
-        text: "#000000",
-        buttonBackground: "#007bff",
-        buttonText: "#ffffff",
+        text: "#0a0d0a",
         color_badge: '#ee0004',
         color_dot: '#f60013',
+        borderMainTap: '#f1f1f1',
+        buttonBackground: "#007bff",
 
     },
     dark: {
-        background: "#000000",
+        background: "#0a0d0a",
         text: "#f7f7f7",
-        buttonBackground: "#444444",
-        buttonText: "#ffffff",
         color_badge: '#ee0004',
         color_dot: '#f60013',
+        borderMainTap: '#202020',
+        buttonBackground: "#444444",
     },
 };
 
