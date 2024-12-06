@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import HeaderView from "./_header";
 import { useTheme } from "../../components/Theme/ThemeContext";
 import Story from "../../components/Stories/Story";
+import Post from "../../components/Posts/Post";
 
 function HomeScreen() {
     const { theme } = useTheme();
@@ -10,11 +11,7 @@ function HomeScreen() {
         <View style={[styles.container, { backgroundColor: theme.background }]}>
             <HeaderView />
             <Story />
-            <View>
-                <Text style={{ fontSize: 30, color: theme.text }}>
-                    ascsaadadvdv
-                </Text>
-            </View>
+            <Post/>
         </View>
     );
 }

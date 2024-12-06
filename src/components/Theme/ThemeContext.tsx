@@ -8,7 +8,7 @@ const themes = {
         color_dot: '#f60013',
         borderMainTap: '#f1f1f1',
         buttonBackground: "#007bff",
-
+        iconTick: '#088cff',
     },
     dark: {
         background: "#0a0d0a",
@@ -17,6 +17,8 @@ const themes = {
         color_dot: '#f60013',
         borderMainTap: '#202020',
         buttonBackground: "#444444",
+        iconTick: '#088cff',
+
     },
 };
 

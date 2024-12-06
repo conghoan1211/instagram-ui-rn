@@ -11,9 +11,12 @@ interface AvatarProps {
     readStory?: boolean
     online?: boolean
     me?: boolean
+    width?: number
+    height?: number
+    borderWithStory?: number
 }
 
-const Avatar: React.FC<AvatarProps> = ({ url, hasStory, readStory = false, online = false, me = false }) => {
+const Avatar: React.FC<AvatarProps> = ({ url, hasStory, readStory = false, online = false, me = false, width = 86, height = 86, borderWithStory = 6, }) => {
     const { theme } = useTheme();
 
     let gradientColors: string[];
@@ -22,7 +25,7 @@ const Avatar: React.FC<AvatarProps> = ({ url, hasStory, readStory = false, onlin
         else gradientColors = ["#DE0046", "#d80464", "#F7A34B"];
     } else gradientColors = ["transparent", "transparent"];
 
-    const borderWithStory = readStory ? 3 : 2.5;
+    const borderStory = readStory ? 3 : 2.5;
 
     return (
         <>
@@ -30,16 +33,24 @@ const Avatar: React.FC<AvatarProps> = ({ url, hasStory, readStory = false, onlin
                 colors={gradientColors as any}
                 start={{ x: 1, y: 0 }}
                 end={{ x: 0.05, y: 0.1 }}
-                style={[styles.storyBorder]}
+                style={[styles.storyBorder, {
+                    height: height,
+                    width: width
+                }]}
             >
                 <Image
                     source={url ?? Images.default_avatar}
-                    style={[styles.image, { borderColor: hasStory ? theme.background : "transparent", borderWidth: borderWithStory }]}
+                    style={[styles.image, {
+                        borderColor: hasStory ? theme.background : "transparent",
+                        borderWidth: borderStory,
+                        width: (width - borderWithStory),
+                        height: (height - borderWithStory)
+                    }]}
                 />
             </LinearGradient>
-            {online && <View style={[styles.online, {borderColor: theme.background}]} />}
+            {online && <View style={[styles.online, { borderColor: theme.background }]} />}
             {me && <View style={[styles.addStory, globalStyles.justify_align_center, { borderColor: theme.background }]}>
-                <IconBase name="plus" library="Entypo" size={18} color="#fff"/>
+                <IconBase name="plus" library="Entypo" size={18} color="#fff" />
             </View>}
         </>
     );
@@ -47,8 +58,6 @@ const Avatar: React.FC<AvatarProps> = ({ url, hasStory, readStory = false, onlin
 
 const styles = StyleSheet.create({
     storyBorder: {
-        width: 86,
-        height: 86,
         borderRadius: 1000,
         alignItems: "center",
         justifyContent: "center",
@@ -58,9 +67,7 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        width: 80,
-        height: 80,
-        borderRadius: 40,
+        borderRadius: 1000,
     },
     online: {
         position: 'absolute',

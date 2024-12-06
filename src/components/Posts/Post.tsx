@@ -1,6 +1,15 @@
+import { View } from "react-native";
+import BodyPost from "./_BodyPost";
+import HeaderPost from "./_HeaderPost";
+import FooterPost from "./_FooterPost";
+
 function Post() {
     return (
-        null
+        <View>
+            <HeaderPost/>
+            <BodyPost/>
+            <FooterPost/>
+        </View>
     );
 }
 

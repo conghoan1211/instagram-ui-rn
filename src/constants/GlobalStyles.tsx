@@ -11,6 +11,10 @@ export const globalStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    align_center: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
     color_badge : {
         color: '#e95950'
     }

@@ -35,7 +35,9 @@ const IconLink: React.FC<IconLinkProps> = ({ name, library, badge, dot, size }) 
 
 const styles = StyleSheet.create({
     icon: {
-        position: 'relative'
+        position: 'relative',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     // badge notification
     badge: {
