@@ -17,7 +17,7 @@ function HeaderView() {
                     <ThemedIcon />
                 </View>
                 <View style={styles.icon}>
-                    <IConLink name="heart" library="Feather" dot size={25} />
+                    <IConLink name="hearto" library="AntDesign" dot size={24} />
                 </View>
                 <View style={styles.icon}>
                     <IConLink name="message-circle" library="Feather" badge={3} />

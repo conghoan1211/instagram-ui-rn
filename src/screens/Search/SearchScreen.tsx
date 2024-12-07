@@ -1,10 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '../../components/Theme/ThemeContext';
 
 export default function SearchScreen() {
+    const { theme } = useTheme();
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Search Screen</Text>
+        <View style={[styles.container, { backgroundColor: theme.background }]}>
+            <Text style={[styles.text, { color: theme.text }]}>Developing</Text>
         </View>
     );
 }

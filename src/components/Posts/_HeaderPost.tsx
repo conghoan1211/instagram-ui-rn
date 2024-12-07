@@ -6,16 +6,26 @@ import { globalStyles } from "../../constants/GlobalStyles";
 import IconBase from "../Icons/IconBase";
 import IconLink from "../Icons/IconLink";
 
-function HeaderPost() {
+interface HeaderPostProps {
+    id: number;
+    username: string;
+    tick: boolean;
+    avatar: string;
+    isfollow: boolean;
+}
+
+function HeaderPost({ username, tick, avatar, isfollow, id }: HeaderPostProps) {
     const { theme } = useTheme();
     return (
         <View style={[styles.container, globalStyles.justify_between]}>
             <View style={[globalStyles.align_center]}>
                 <Avatar url={glasses} width={40} height={40} hasStory borderWithStory={3} />
                 <Text style={[styles.name, { color: theme.text }]}>
-                    roses_are_rosie
+                    {username}
                 </Text>
-                <IconBase name="verified" library="MaterialIcons" size={14} color={theme.iconTick} />
+                {tick && <View style={styles.iconVerify}>
+                    <IconBase name="verified" library="MaterialIcons" size={14} color={theme.iconTick} />
+                </View>}
             </View>
             <View>
                 <IconLink name="dots-three-horizontal" library="Entypo" size={18} />
@@ -31,13 +41,16 @@ const styles = StyleSheet.create({
         maxWidth: '100%',
         paddingLeft: 8,
         paddingRight: 12,
-
+        // backgroundColor: 'red'
     },
     name: {
-        fontWeight: '500',
+        fontWeight: '600',
         fontSize: 14,
         marginLeft: 8,
         marginRight: 5
+    },
+    iconVerify: {
+        marginTop: 2
     }
 
 });

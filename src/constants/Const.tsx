@@ -1,12 +1,12 @@
 import {
     Feather, Entypo, Octicons, FontAwesome5,
     FontAwesome, EvilIcons, AntDesign, Foundation, MaterialIcons,
-    MaterialCommunityIcons, 
+    MaterialCommunityIcons, FontAwesome6, SimpleLineIcons,
 } from "@expo/vector-icons";
 
 export type IconLibrary = 'Feather' | 'Entypo' | 'Octicons' | 'FontAwesome5' |
     'FontAwesome' | 'EvilIcons' | 'AntDesign' | 'Foundation' | 'MaterialIcons' |
-    'MaterialCommunityIcons';
+    'MaterialCommunityIcons' | 'FontAwesome6' | 'SimpleLineIcons';
 
 export const IconMap: Record<IconLibrary, any> = {
     Feather,
@@ -19,6 +19,8 @@ export const IconMap: Record<IconLibrary, any> = {
     Foundation,
     MaterialIcons,
     MaterialCommunityIcons,
+    FontAwesome6,
+    SimpleLineIcons
 };
 
 const Images = {
