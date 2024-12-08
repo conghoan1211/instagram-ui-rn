@@ -3,7 +3,23 @@ import HeaderView from "./_header";
 import { useTheme } from "../../components/Theme/ThemeContext";
 import Story from "../../components/Stories/Story";
 import Post from "../../components/Posts/Post";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { FlatList } from "react-native-gesture-handler";
+
+interface PostProps {
+    id: number;
+    username: string;
+    tick: boolean;
+    isfollow: boolean;
+    avatar: string;
+    image: string;
+    caption: string;
+    likes: number;
+    comments: number;
+    shares: number;
+    isLiked: boolean;
+    timestamp: Date;
+}
+
 
 function HomeScreen() {
     const { theme } = useTheme();
@@ -12,56 +28,66 @@ function HomeScreen() {
             id: 1,
             username: 'roses_are_rosie',
             tick: true,
-            isfollow: true,
-            avatar: require('../../assests/Img/glasses.jpg'), // Đường dẫn ảnh cục bộ
-            image: require('../../assests/Img/kttend.jpg'),   // Đường dẫn ảnh cục bộ
+            isfollow: false,
+            avatar: require('../../assests/Img/glasses.jpg'),
+            image: require('../../assests/Img/kttend.jpg'),
             caption: 'call us what we are  dvhosdv ;SV: SV SKV SIDvdjs shvisoiv sdv',
             likes: 1219,
             comments: 311,
-            shares: 54,
+            shares: 5,
             isLiked: false,
-            timestamp: new Date('2024-12-07T13:30:00Z'),
+            timestamp: new Date('2024-12-05T13:30:00Z'),
         },
         {
             id: 2,
-            username: 'janedoe',
-            tick: false,
-            isfollow: true,
-            avatar: require('../../assests/Img/glasses.jpg'), // Đường dẫn ảnh cục bộ
-            image: require('../../assests/Img/kttend.jpg'),   // Đường dẫn ảnh cục bộ
+            username: 'lia_loves___',
+            tick: true,
+            isfollow: false,
+            avatar: require('../../assests/Img/glasses.jpg'),
+            image: require('../../assests/Img/kttend.jpg'),
             caption: 'Loving this day at the beach 🏖️',
-            likes: 87100,
-            comments: 8,
-            shares: 1,
-            isLiked: true,
-            timestamp: new Date('2024-12-06T13:30:00Z'),
+            likes: 78921,
+            comments: 311,
+            shares: 54,
+            isLiked: false,
+            timestamp: new Date('2024-10-07T13:30:00Z'),
         },
         {
             id: 3,
             username: 'janedoe',
             tick: false,
             isfollow: true,
-            avatar: require('../../assests/Img/glasses.jpg'), // Đường dẫn ảnh cục bộ
-            image: require('../../assests/Img/kttend.jpg'),   // Đường dẫn ảnh cục bộ
-            caption: 'Loving this day at the beach 🏖️',
-            likes: 87100,
-            comments: 8,
-            shares: 1,
-            isLiked: true,
-            timestamp: new Date('2024-10-05T13:30:00Z'),
+            avatar: require('../../assests/Img/glasses.jpg'),
+            image: require('../../assests/Img/kttend.jpg'),
+            caption: 'call us what we are  dvhosdv ;SV: SV SKV SIDvdjs shvisoiv sdv',
+            likes: 894,
+            comments: 311,
+            shares: 54,
+            isLiked: false,
+            timestamp: new Date('2024-12-07T13:30:00Z'),
         },
     ];
 
-    return (
-        <ScrollView style={[styles.container, { backgroundColor: theme.background }]}>
+    const renderHeader = () => (
+        <>
             <HeaderView />
             <Story />
-            <View>
-                {posts.map((post) => (
-                    <Post key={post.id} post={post} />
-                ))}
-            </View>
-        </ScrollView>
+        </>
+    );
+
+    const renderItem = ({ item }: { item: PostProps }) => (
+        <Post post={item} />
+    );
+
+    return (
+        <FlatList
+            showsVerticalScrollIndicator={false}
+            style={[styles.container, { backgroundColor: theme.background }]}
+            data={posts}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id.toString()}
+            ListHeaderComponent={renderHeader}
+        />
     );
 }
 

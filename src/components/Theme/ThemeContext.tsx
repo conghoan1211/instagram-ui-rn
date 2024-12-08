@@ -4,21 +4,28 @@ const themes = {
     light: {
         background: "#fff",
         text: "#0a0d0a",
+        textStory: '#f2f2f2',
+
         color_badge: '#ee0004',
         color_dot: '#f60013',
         borderMainTap: '#f1f1f1',
         buttonBackground: "#007bff",
         iconTick: '#088cff',
+        btn_primary_bg: '#e9e9e9',
+        heartActive: '#ff3040',
     },
     dark: {
         background: "#0a0d0a",
         text: "#f7f7f7",
+        textStory: '#f7f7f7',
+
         color_badge: '#ee0004',
         color_dot: '#f60013',
         borderMainTap: '#202020',
         buttonBackground: "#444444",
         iconTick: '#088cff',
-
+        btn_primary_bg: '#292929',
+        heartActive: '#ff3040',
     },
 };
 

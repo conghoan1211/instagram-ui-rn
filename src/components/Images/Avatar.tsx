@@ -81,13 +81,13 @@ const styles = StyleSheet.create({
     },
     addStory: {
         position: 'absolute',
-        bottom: 3,
-        right: -2,
+        bottom: 5,
+        right: 4,
         width: 28,
         height: 28,
         borderRadius: 1000,
         color: '#fff',
-        backgroundColor: '#1877f2',
+        backgroundColor: '#007bff',
         borderWidth: 3,
     }
 });

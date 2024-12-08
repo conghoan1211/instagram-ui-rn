@@ -9,14 +9,16 @@ interface IconLinkProps {
     size?: number;
     badge?: number;
     dot?: boolean;
+    color?: string
+    onPress?: () => void;
 }
 
-const IconLink: React.FC<IconLinkProps> = ({ name, library, badge, dot, size }) => {
+const IconLink: React.FC<IconLinkProps> = ({ name, library, badge, dot, size, color, onPress }) => {
     const { theme } = useTheme();
 
     return (
-        <TouchableOpacity activeOpacity={0.5} style={styles.icon}>
-            <IconBase name={name} library={library} size={size} />
+        <TouchableOpacity activeOpacity={0.5} style={styles.icon} onPress={onPress}>
+            <IconBase name={name} library={library} size={size} color={color} />
 
             {badge !== undefined && badge > 0 && (
                 <View style={styles.badge}>

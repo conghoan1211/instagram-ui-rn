@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import Avatar from "../Images/Avatar";
-import glasses from './../../assests/Img/glasses.jpg';
 import { useTheme } from "../Theme/ThemeContext";
 import { globalStyles } from "../../constants/GlobalStyles";
 import IconBase from "../Icons/IconBase";
 import IconLink from "../Icons/IconLink";
+import ButtonBase from "../Button/ButtonBase";
 
 interface HeaderPostProps {
     id: number;
@@ -13,22 +13,35 @@ interface HeaderPostProps {
     avatar: string;
     isfollow: boolean;
 }
-
-function HeaderPost({ username, tick, avatar, isfollow, id }: HeaderPostProps) {
+const HeaderPost: React.FC<HeaderPostProps> = ({ username, tick, avatar, isfollow, id }) => {
     const { theme } = useTheme();
+
     return (
         <View style={[styles.container, globalStyles.justify_between]}>
             <View style={[globalStyles.align_center]}>
-                <Avatar url={glasses} width={40} height={40} hasStory borderWithStory={3} />
-                <Text style={[styles.name, { color: theme.text }]}>
-                    {username}
-                </Text>
-                {tick && <View style={styles.iconVerify}>
-                    <IconBase name="verified" library="MaterialIcons" size={14} color={theme.iconTick} />
-                </View>}
+                <Avatar url={avatar} width={40} height={40} hasStory borderWithStory={3} />
+                <View style={styles.title}>
+                    <View style={globalStyles.align_center}>
+                        <Text style={[styles.name, { color: theme.text }]}>
+                            {username}
+                        </Text>
+                        {tick && <View style={styles.iconVerify}>
+                            <IconBase name="verified" library="MaterialIcons" size={14} color={theme.iconTick} />
+                        </View>}
+                    </View>
+                    {!isfollow && <Text style={[styles.suggested, { color: theme.text }]}> Suggested for you</Text>}
+                </View>
             </View>
-            <View>
-                <IconLink name="dots-three-horizontal" library="Entypo" size={18} />
+            <View style={globalStyles.align_center}>
+                {!isfollow && <View style={styles.buttonFollow}>
+                    <ButtonBase title="Follow"
+                        onPress={() => alert('Message button pressed')}
+                        type="secondary"
+                    />
+                </View>}
+                <View>
+                    <IconLink name="dots-three-horizontal" library="Entypo" size={18} />
+                </View>
             </View>
         </View>
     );
@@ -41,16 +54,33 @@ const styles = StyleSheet.create({
         maxWidth: '100%',
         paddingLeft: 8,
         paddingRight: 12,
-        // backgroundColor: 'red'
+        ...Platform.select({
+            android: {
+                marginBottom: 4,
+            },
+            ios: {
+                marginBottom: 2
+            }
+        })
+    },
+    title: {
+        marginLeft: 8,
     },
     name: {
         fontWeight: '600',
-        fontSize: 14,
-        marginLeft: 8,
-        marginRight: 5
+        fontSize: 14.5,
+        marginRight: 5,
+
+    },
+    suggested: {
+        fontSize: 13,
+        marginLeft: -4,
     },
     iconVerify: {
         marginTop: 2
+    },
+    buttonFollow: {
+        marginRight: 15
     }
 
 });

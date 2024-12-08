@@ -1,10 +1,11 @@
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { useState } from "react";
+
 import BodyPost from "./_BodyPost";
 import HeaderPost from "./_HeaderPost";
 import FooterPost from "./_FooterPost";
-import { Text } from "react-native";
-import { useTheme } from "../Theme/ThemeContext";
 import CaptionPost from "./_CaptionPost";
+import { useTheme } from "../Theme/ThemeContext";
 
 interface PostProps {
     id: number;
@@ -27,12 +28,34 @@ interface Props {
 
 const Post: React.FC<Props> = ({ post }) => {
     const { theme } = useTheme();
+    const [isLiked, setIsLiked] = useState(post.isLiked);
+    const [likes, setLikes] = useState(post.likes);
 
+    const handleToggleLike = () => {
+        if (isLiked) {
+            setLikes(likes - 1);
+        } else {
+            setLikes(likes + 1);
+        }
+        setIsLiked(!isLiked);
+    };
+    const handleDoubleTap = () => {
+        if (!isLiked) {
+            setLikes(likes + 1);
+            setIsLiked(true);
+        }
+    };
     return (
         <View style={[styles.postContainer, { backgroundColor: theme.background }]}>
             <HeaderPost isfollow={post.isfollow} avatar={post.avatar} id={post.id} tick={post.tick} username={post.username} />
-            <BodyPost image={post.image} />
-            <FooterPost isLiked={post.isLiked} likes={post.likes} comments={post.comments} shares={post.shares}/>
+            <BodyPost image={post.image} onDoubleTap={handleDoubleTap} />
+            <FooterPost
+                isLiked={isLiked}
+                likes={likes}
+                comments={post.comments}
+                shares={post.shares}
+                onToggleLike={handleToggleLike}  
+            />
             <CaptionPost caption={post.caption} createdAt={post.timestamp} username={post.username} />
         </View>
     );
