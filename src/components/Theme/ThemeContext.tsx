@@ -4,7 +4,7 @@ const themes = {
     light: {
         background: "#fff",
         text: "#0a0d0a",
-        textStory: '#f2f2f2',
+        textStory: '#0a0d0a',
 
         color_badge: '#ee0004',
         color_dot: '#f60013',

@@ -13,7 +13,7 @@ interface PostProps {
     tick: boolean;
     isfollow: boolean;
     avatar: string;
-    image: string;
+    images: string[];
     caption: string;
     likes: number;
     comments: number;
@@ -48,7 +48,7 @@ const Post: React.FC<Props> = ({ post }) => {
     return (
         <View style={[styles.postContainer, { backgroundColor: theme.background }]}>
             <HeaderPost isfollow={post.isfollow} avatar={post.avatar} id={post.id} tick={post.tick} username={post.username} />
-            <BodyPost image={post.image} onDoubleTap={handleDoubleTap} />
+            <BodyPost images={post.images} onDoubleTap={handleDoubleTap} />
             <FooterPost
                 isLiked={isLiked}
                 likes={likes}
@@ -60,6 +60,7 @@ const Post: React.FC<Props> = ({ post }) => {
         </View>
     );
 };
+
 const styles = StyleSheet.create({
     postContainer: {
         marginBottom: 20,

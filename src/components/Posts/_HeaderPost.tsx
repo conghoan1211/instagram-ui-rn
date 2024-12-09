@@ -36,7 +36,7 @@ const HeaderPost: React.FC<HeaderPostProps> = ({ username, tick, avatar, isfollo
                 {!isfollow && <View style={styles.buttonFollow}>
                     <ButtonBase title="Follow"
                         onPress={() => alert('Message button pressed')}
-                        type="secondary"
+                        type="primary"
                     />
                 </View>}
                 <View>

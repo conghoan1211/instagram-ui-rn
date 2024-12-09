@@ -11,7 +11,7 @@ interface PostProps {
     tick: boolean;
     isfollow: boolean;
     avatar: string;
-    image: string;
+    images: string[];
     caption: string;
     likes: number;
     comments: number;
@@ -30,7 +30,10 @@ function HomeScreen() {
             tick: true,
             isfollow: false,
             avatar: require('../../assests/Img/glasses.jpg'),
-            image: require('../../assests/Img/kttend.jpg'),
+            images: [
+                require('../../assests/Img/kttend.jpg'),
+                require('../../assests/Img/glasses.jpg'),
+            ],
             caption: 'call us what we are  dvhosdv ;SV: SV SKV SIDvdjs shvisoiv sdv',
             likes: 1219,
             comments: 311,
@@ -44,7 +47,10 @@ function HomeScreen() {
             tick: true,
             isfollow: false,
             avatar: require('../../assests/Img/glasses.jpg'),
-            image: require('../../assests/Img/kttend.jpg'),
+            images: [
+                require('../../assests/Img/kttend.jpg'),
+                require('../../assests/Img/glasses.jpg'),
+            ],
             caption: 'Loving this day at the beach 🏖️',
             likes: 78921,
             comments: 311,
@@ -58,7 +64,10 @@ function HomeScreen() {
             tick: false,
             isfollow: true,
             avatar: require('../../assests/Img/glasses.jpg'),
-            image: require('../../assests/Img/kttend.jpg'),
+            images: [
+                require('../../assests/Img/kttend.jpg'),
+                require('../../assests/Img/glasses.jpg'),
+            ],
             caption: 'call us what we are  dvhosdv ;SV: SV SKV SIDvdjs shvisoiv sdv',
             likes: 894,
             comments: 311,

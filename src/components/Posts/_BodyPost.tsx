@@ -1,17 +1,19 @@
 import { useRef, useState } from "react";
-import { Animated, Image, Pressable, StyleSheet, TouchableWithoutFeedback } from "react-native";
-import { AntDesign } from '@expo/vector-icons';
-import { View } from "react-native";
+import {
+    Animated, Image, View, StyleSheet, FlatList,
+    TouchableWithoutFeedback, GestureResponderEvent,
+    Dimensions,
+    Text
+} from "react-native";
 import { useTheme } from "../Theme/ThemeContext";
-import { GestureResponderEvent } from "react-native";
 import IconBase from "../Icons/IconBase";
 
 interface BodyPostProps {
-    image: string;
-    onDoubleTap: () => void;  
+    images: string[];
+    onDoubleTap: () => void;
 }
 
-const BodyPost: React.FC<BodyPostProps> = ({ image, onDoubleTap }) => {
+const BodyPost: React.FC<BodyPostProps> = ({ images, onDoubleTap }) => {
     const { theme } = useTheme();
     const lastTap = useRef<number>(0);
     const containerRef = useRef<View>(null); // Thêm ref để lấy tọa độ View
@@ -21,26 +23,25 @@ const BodyPost: React.FC<BodyPostProps> = ({ image, onDoubleTap }) => {
         y: number,
         scale: Animated.Value
     }>>([]);
+    const screenWidth = Dimensions.get('window').width;
 
     const handleDoubleTap = (event: GestureResponderEvent) => {
         const now = Date.now();
         const { pageX, pageY } = event.nativeEvent;
 
         if (now - lastTap.current < 300) {
-            // Lấy tọa độ của View chứa ảnh
             containerRef.current?.measure((x, y, width, height, pageXOffset, pageYOffset) => {
                 const adjustedX = pageX - pageXOffset; // Tọa độ x trong View
                 const adjustedY = pageY - pageYOffset; // Tọa độ y trong View
 
-                // Tạo trái tim tại vị trí được tính toán
                 const newHeart = {
-                    id: now, // Dùng timestamp làm id
+                    id: now,
                     x: adjustedX,
                     y: adjustedY,
                     scale: new Animated.Value(0),
                 };
 
-                setHearts(prevHearts => [...prevHearts, newHeart]);
+                setHearts((prevHearts) => [...prevHearts, newHeart]);
 
                 Animated.sequence([
                     Animated.spring(newHeart.scale, {
@@ -55,42 +56,48 @@ const BodyPost: React.FC<BodyPostProps> = ({ image, onDoubleTap }) => {
                         useNativeDriver: true,
                     }),
                 ]).start(() => {
-                    // Xóa heart sau khi animation kết thúc
-                    setHearts(prevHearts =>
-                        prevHearts.filter(heart => heart.id !== newHeart.id)
+                    setHearts((prevHearts) =>
+                        prevHearts.filter((heart) => heart.id !== newHeart.id)
                     );
                 });
 
-                onDoubleTap(); // Gọi hàm callback
+                onDoubleTap();
             });
         }
         lastTap.current = now;
     };
 
     return (
-        <TouchableWithoutFeedback onPress={handleDoubleTap}>
-            <View ref={containerRef} style={styles.container}>
-                <Image source={image as any} style={styles.image} />
-                {hearts.map(heart => (
-                    <Animated.View
-                        key={heart.id}
-                        style={{
-                            position: 'absolute',
-                            left: heart.x - 35, // Điều chỉnh cho trái tim nằm chính giữa vị trí chạm
-                            top: heart.y - 35,
-                            transform: [{ scale: heart.scale }],
-                        }}
-                    >
-                        <IconBase
-                            name="heart"
-                            library="AntDesign"
-                            size={70}
-                            color={theme.heartActive}
-                        />
-                    </Animated.View>
-                ))}
+        <View ref={containerRef} style={styles.container}>
+            <FlatList
+                data={images}
+                horizontal
+                pagingEnabled
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => (
+                    <TouchableWithoutFeedback onPress={handleDoubleTap}>
+                        <Image source={item as any} style={[styles.image, { width: screenWidth }]} />
+                    </TouchableWithoutFeedback>
+                )}
+            />
+            <View style={styles.order}>
+                <Text style={styles.orderNumber}>1/2</Text>
             </View>
-        </TouchableWithoutFeedback>
+            {hearts.map(heart => (
+                <Animated.View
+                    key={heart.id}
+                    style={{
+                        position: 'absolute',
+                        left: heart.x - 35, // Điều chỉnh cho trái tim nằm chính giữa vị trí chạm
+                        top: heart.y - 35,
+                        transform: [{ scale: heart.scale }],
+                    }}
+                >
+                    <IconBase name="heart" library="AntDesign" size={70} color={theme.heartActive} />
+                </Animated.View>
+            ))}
+        </View>
     );
 };
 
@@ -100,9 +107,23 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     image: {
+        resizeMode: 'contain',
         width: '100%',
-        resizeMode: 'cover',
-        height: 300,
+        maxHeight: 300,
+    },
+    order: {
+        position: 'absolute',
+        right : 12,
+        top: 18,
+        borderRadius: 16,
+        width: 40,
+        height: 30,
+        backgroundColor: '#333',
+        alignItems:'center',
+        justifyContent: 'center'
+    },
+    orderNumber: {  
+        color: '#f2f2f2',
     },
 });
 
