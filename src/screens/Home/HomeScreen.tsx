@@ -33,6 +33,8 @@ function HomeScreen() {
             images: [
                 require('../../assests/Img/kttend.jpg'),
                 require('../../assests/Img/glasses.jpg'),
+                require('../../assests/Img/glasses.jpg'),
+                require('../../assests/Img/glasses.jpg'),
             ],
             caption: 'call us what we are  dvhosdv ;SV: SV SKV SIDvdjs shvisoiv sdv',
             likes: 1219,
@@ -49,7 +51,6 @@ function HomeScreen() {
             avatar: require('../../assests/Img/glasses.jpg'),
             images: [
                 require('../../assests/Img/kttend.jpg'),
-                require('../../assests/Img/glasses.jpg'),
             ],
             caption: 'Loving this day at the beach 🏖️',
             likes: 78921,

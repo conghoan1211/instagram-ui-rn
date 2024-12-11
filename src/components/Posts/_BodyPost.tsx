@@ -7,6 +7,8 @@ import {
 } from "react-native";
 import { useTheme } from "../Theme/ThemeContext";
 import IconBase from "../Icons/IconBase";
+import { NativeSyntheticEvent } from "react-native";
+import { NativeScrollEvent } from "react-native";
 
 interface BodyPostProps {
     images: string[];
@@ -24,6 +26,7 @@ const BodyPost: React.FC<BodyPostProps> = ({ images, onDoubleTap }) => {
         scale: Animated.Value
     }>>([]);
     const screenWidth = Dimensions.get('window').width;
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleDoubleTap = (event: GestureResponderEvent) => {
         const now = Date.now();
@@ -52,7 +55,7 @@ const BodyPost: React.FC<BodyPostProps> = ({ images, onDoubleTap }) => {
                     Animated.timing(newHeart.scale, {
                         toValue: 0,
                         duration: 100,
-                        delay: 400,
+                        delay: 0,
                         useNativeDriver: true,
                     }),
                 ]).start(() => {
@@ -66,7 +69,11 @@ const BodyPost: React.FC<BodyPostProps> = ({ images, onDoubleTap }) => {
         }
         lastTap.current = now;
     };
-
+    const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+        const contentOffsetX = event.nativeEvent.contentOffset.x;
+        const index = Math.round(contentOffsetX / screenWidth); // Tính chỉ số ảnh hiện tại
+        setCurrentIndex(index);
+    };
     return (
         <View ref={containerRef} style={styles.container}>
             <FlatList
@@ -74,6 +81,7 @@ const BodyPost: React.FC<BodyPostProps> = ({ images, onDoubleTap }) => {
                 horizontal
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
+                onScroll={handleScroll} // Lắng nghe sự kiện scroll
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
                     <TouchableWithoutFeedback onPress={handleDoubleTap}>
@@ -81,9 +89,11 @@ const BodyPost: React.FC<BodyPostProps> = ({ images, onDoubleTap }) => {
                     </TouchableWithoutFeedback>
                 )}
             />
-            <View style={styles.order}>
-                <Text style={styles.orderNumber}>1/2</Text>
-            </View>
+            {images.length > 1 && (
+                <View style={styles.order}>
+                    <Text style={styles.orderNumber}>{currentIndex + 1}/{images.length}</Text>
+                </View>
+            )}
             {hearts.map(heart => (
                 <Animated.View
                     key={heart.id}
@@ -94,7 +104,7 @@ const BodyPost: React.FC<BodyPostProps> = ({ images, onDoubleTap }) => {
                         transform: [{ scale: heart.scale }],
                     }}
                 >
-                    <IconBase name="heart" library="AntDesign" size={70} color={theme.heartActive} />
+                    <IconBase name="heart" library="AntDesign" size={90} color={theme.heartActive} />
                 </Animated.View>
             ))}
         </View>
@@ -113,16 +123,16 @@ const styles = StyleSheet.create({
     },
     order: {
         position: 'absolute',
-        right : 12,
+        right: 12,
         top: 18,
         borderRadius: 16,
         width: 40,
         height: 30,
-        backgroundColor: '#333',
-        alignItems:'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        alignItems: 'center',
         justifyContent: 'center'
     },
-    orderNumber: {  
+    orderNumber: {
         color: '#f2f2f2',
     },
 });
