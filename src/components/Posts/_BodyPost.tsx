@@ -2,13 +2,11 @@ import { useRef, useState } from "react";
 import {
     Animated, Image, View, StyleSheet, FlatList,
     TouchableWithoutFeedback, GestureResponderEvent,
-    Dimensions,
+    Dimensions, NativeSyntheticEvent, NativeScrollEvent,
     Text
 } from "react-native";
 import { useTheme } from "../Theme/ThemeContext";
 import IconBase from "../Icons/IconBase";
-import { NativeSyntheticEvent } from "react-native";
-import { NativeScrollEvent } from "react-native";
 
 interface BodyPostProps {
     images: string[];
