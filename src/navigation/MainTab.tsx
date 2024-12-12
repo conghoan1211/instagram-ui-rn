@@ -30,11 +30,7 @@ function MainTab() {
                     headerShown: false,
                 })}
             >
-                <Tab.Screen
-                    name="home"
-                    component={HomeScreen}
-                    options={{ title: '' }}
-                />
+                <Tab.Screen name="home" component={HomeScreen} options={{ title: '' }} />
                 <Tab.Screen name="search" component={SearchScreen} options={{ title: '' }} />
                 <Tab.Screen name="upPost" component={UpPostScreen} options={{ title: '' }} />
                 <Tab.Screen name="video" component={VideoScreen} options={{ title: '' }} />

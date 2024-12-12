@@ -9,11 +9,14 @@ interface IconLinkProps {
     size?: number;
     badge?: number;
     dot?: boolean;
-    color?: string
+    color?: string;
+    topBadge?: number,
+    bottomBadge?: number,
+    rightBadge?: number,
     onPress?: () => void;
 }
 
-const IconLink: React.FC<IconLinkProps> = ({ name, library, badge, dot, size, color, onPress }) => {
+const IconLink: React.FC<IconLinkProps> = ({ name, library, badge, dot, size, color, topBadge, bottomBadge, rightBadge, onPress }) => {
     const { theme } = useTheme();
 
     return (
@@ -21,7 +24,7 @@ const IconLink: React.FC<IconLinkProps> = ({ name, library, badge, dot, size, co
             <IconBase name={name} library={library} size={size} color={color} />
 
             {badge !== undefined && badge > 0 && (
-                <View style={styles.badge}>
+                <View style={[styles.badge, { top: topBadge ?? -6, right: rightBadge ?? -6}]}>
                     <Text style={[styles.badge_number]}>
                         {badge}
                     </Text>
@@ -44,8 +47,6 @@ const styles = StyleSheet.create({
     // badge notification
     badge: {
         position: 'absolute',
-        top: -6,
-        right: -6,
         backgroundColor: '#ee0004',
         width: 18,
         height: 18,

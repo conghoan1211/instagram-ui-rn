@@ -13,10 +13,13 @@ interface AvatarProps {
     me?: boolean
     width?: number
     height?: number
-    borderWithStory?: number
+    borderWithStory?: number,
+    border?: boolean,
+    borderWidth?: number
 }
 
-const Avatar: React.FC<AvatarProps> = ({ url, hasStory, readStory = false, online = false, me = false, width = 86, height = 86, borderWithStory = 6, }) => {
+const Avatar: React.FC<AvatarProps> = ({ url, hasStory, readStory = false, online = false, me = false,
+    width = 86, height = 86, borderWithStory = 6, border, borderWidth }) => {
     const { theme } = useTheme();
 
     let gradientColors: string[];
@@ -35,14 +38,14 @@ const Avatar: React.FC<AvatarProps> = ({ url, hasStory, readStory = false, onlin
                 end={{ x: 0.05, y: 0.1 }}
                 style={[styles.storyBorder, {
                     height: height,
-                    width: width
+                    width: width,
                 }]}
             >
                 <Image
                     source={url ?? Images.default_avatar}
                     style={[styles.image, {
-                        borderColor: hasStory ? theme.background : "transparent",
-                        borderWidth: borderStory,
+                        borderColor: hasStory ? theme.background : border ? '#cccccc' : "transparent",
+                        borderWidth: borderWidth ?? borderStory,
                         width: (width - borderWithStory),
                         height: (height - borderWithStory)
                     }]}
@@ -64,7 +67,6 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
         overflow: "hidden",
         position: 'relative',
-
     },
     image: {
         borderRadius: 1000,
