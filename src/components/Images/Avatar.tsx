@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from "../Theme/ThemeContext";
 import IconBase from "../Icons/IconBase";
 import { globalStyles } from "../../constants/GlobalStyles";
+import React from "react";
 
 interface AvatarProps {
     url?: string
@@ -15,11 +16,12 @@ interface AvatarProps {
     height?: number
     borderWithStory?: number,
     border?: boolean,
-    borderWidth?: number
+    borderWidth?: number,
+    borderColor?: string,
 }
 
 const Avatar: React.FC<AvatarProps> = ({ url, hasStory, readStory = false, online = false, me = false,
-    width = 86, height = 86, borderWithStory = 6, border, borderWidth }) => {
+    width = 86, height = 86, borderWithStory = 6, border, borderWidth, borderColor = '#cccccc' }) => {
     const { theme } = useTheme();
 
     let gradientColors: string[];
@@ -44,7 +46,7 @@ const Avatar: React.FC<AvatarProps> = ({ url, hasStory, readStory = false, onlin
                 <Image
                     source={url ?? Images.default_avatar}
                     style={[styles.image, {
-                        borderColor: hasStory ? theme.background : border ? '#cccccc' : "transparent",
+                        borderColor: hasStory ? theme.background : border ? borderColor : "transparent",
                         borderWidth: borderWidth ?? borderStory,
                         width: (width - borderWithStory),
                         height: (height - borderWithStory)

@@ -1,18 +1,17 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TextBase, TouchableOpacity, View } from "react-native";
 import avt from './../../assests/Img/avt.jpg';
 import Avatar from "../../components/Images/Avatar";
 import { useTheme } from "../../components/Theme/ThemeContext";
 
-function InforProfile() {
+function Infor() {
     const { theme } = useTheme();
 
     return (
         <View style={styles.container}>
             <View style={styles.avatar} >
                 <Avatar url={avt} me width={90} height={90} border borderWidth={0.2} />
-                <Text style={[styles.username, { color: theme.text }]}>Phạm Hoan</Text>
-                <View>
-                    <Text>Drop a thought</Text>
+                <View style={[styles.thoughtBubble, { backgroundColor: theme.bgAvtStory }]}>
+                    <Text style={[styles.thoughtText, {}]}>Note...</Text>
                 </View>
             </View>
             <TouchableOpacity activeOpacity={0.7} style={styles.box}>
@@ -40,29 +39,37 @@ const styles = StyleSheet.create({
     avatar: {
         width: 94,
         height: 94,
+        position: 'relative',
     },
     text: {
         fontSize: 20,
         fontWeight: 'bold',
-    },
-    username: {
-        fontSize: 14.5,
-        fontWeight: '600',
-        textAlign: 'center',
-        marginTop: 12
     },
     box: {
         alignItems: 'center',
         justifyContent: 'center',
         width: 90
     },
-    number : {
+    number: {
         fontWeight: '600',
         fontSize: 15,
     },
     title: {
         fontSize: 13.5
-    }
+    },
+    thoughtBubble: {
+        position: 'absolute',
+        top: -14,
+        backgroundColor: '#363636',
+        paddingHorizontal: 12,
+        paddingVertical: 10,
+        borderRadius: 15,
+        zIndex: 1,
+    },
+    thoughtText: {
+        fontSize: 12,
+        color: '#888'
+    },
 });
 
-export default InforProfile;
+export default Infor;

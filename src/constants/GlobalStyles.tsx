@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
-    justify_between : {
+    justify_between: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
@@ -15,8 +15,12 @@ export const globalStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-    color_badge : {
+    color_badge: {
         color: '#e95950'
     }
-    
+
 })
+
+export const Colors = {
+    btnPrimary: '#0095f6',
+};

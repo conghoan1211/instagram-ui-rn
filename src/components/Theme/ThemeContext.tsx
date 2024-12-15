@@ -5,6 +5,8 @@ const themes = {
         background: "#fff",
         text: "#0a0d0a",
         textStory: '#0a0d0a',
+        bgAvtStory: '#f4f4f4',
+        textAvtStory: '#ccc',
 
         color_badge: '#ee0004',
         color_dot: '#f60013',
@@ -18,6 +20,8 @@ const themes = {
         background: "#0a0d0a",
         text: "#f7f7f7",
         textStory: '#f7f7f7',
+        bgAvtStory: '#363636',
+        textAvtStory: '#ccc',
 
         color_badge: '#ee0004',
         color_dot: '#f60013',

@@ -1,37 +1,42 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+    DimensionValue, StyleSheet, Text, TouchableOpacity,
+    StyleProp, ViewStyle, TextStyle
+} from "react-native";
 import { useTheme } from "../Theme/ThemeContext";
 
 interface ButtonBaseProps {
     title: string;
-    onPress: () => void;
+    onPress?: () => void;
     type?: 'primary' | 'secondary';
     disabled?: boolean;
-    width?: number,
-    height?: number,
+    width?: DimensionValue,
+    height?: DimensionValue,
     fontSize?: number,
-    color?: string
+    color?: string,
+    style?: StyleProp<ViewStyle>;
+    textStyle?: StyleProp<TextStyle>;
 }
 
-const ButtonBase: React.FC<ButtonBaseProps> = ({ title, onPress, type = 'primary', disabled = false, width = 72, height = 34, fontSize, color }) => {
+const ButtonBase: React.FC<ButtonBaseProps> = ({ title, onPress, type = 'primary', disabled = false,
+    width = 72, height = 34, fontSize, color, style, textStyle }) => {
     const { theme } = useTheme();
 
     return (
         <TouchableOpacity
             style={[
                 styles.button,
-                type === 'primary' ? {
-                    backgroundColor: theme.btn_primary_bg,
-                    height: height, width: width
-                } : {
-                    backgroundColor: 'transparent',
-                    borderColor: theme.text,
-                    borderWidth: 1,
-                    height: height, width: width
+                {
+                    width: width,
+                    height: height,
+                    backgroundColor: type === 'primary'  ? theme.btn_primary_bg : 'transparent',
+                    borderColor: type === 'secondary' ? theme.text : 'transparent',
+                    borderWidth: type === 'secondary' ? 1 : 0,
                 },
                 disabled && styles.disabledButton,
+                style
             ]}
             onPress={onPress}
-            activeOpacity={0.5}
+            activeOpacity={0.7}
             disabled={disabled}
         >
             <Text style={[
@@ -40,7 +45,7 @@ const ButtonBase: React.FC<ButtonBaseProps> = ({ title, onPress, type = 'primary
                     color: color ?? theme.text,
                     fontSize: fontSize ?? 14
                 },
-                disabled && styles.disabledText,
+                disabled && styles.disabledText, textStyle
             ]} > {title} </Text>
         </TouchableOpacity>
     );

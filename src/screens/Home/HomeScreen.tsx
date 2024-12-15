@@ -4,6 +4,7 @@ import { useTheme } from "../../components/Theme/ThemeContext";
 import Story from "../../components/Stories/Story";
 import Post from "../../components/Posts/Post";
 import { FlatList } from "react-native-gesture-handler";
+import React from "react";
 
 interface PostProps {
     id: number;
@@ -19,65 +20,65 @@ interface PostProps {
     isLiked: boolean;
     timestamp: Date;
 }
+const posts = [
+    {
+        id: 1,
+        username: 'roses_are_rosie',
+        tick: true,
+        isfollow: false,
+        avatar: require('../../assests/Img/glasses.jpg'),
+        images: [
+            require('../../assests/Img/kttend.jpg'),
+            require('../../assests/Img/glasses.jpg'),
+            require('../../assests/Img/glasses.jpg'),
+            require('../../assests/Img/glasses.jpg'),
+        ],
+        caption: 'call us what we are  dvhosdv ;SV: SV SKV SIDvdjs shvisoiv sdv',
+        likes: 1219,
+        comments: 311,
+        shares: 5,
+        isLiked: false,
+        timestamp: new Date('2024-12-05T13:30:00Z'),
+    },
+    {
+        id: 2,
+        username: 'lia_loves___',
+        tick: true,
+        isfollow: false,
+        avatar: require('../../assests/Img/glasses.jpg'),
+        images: [
+            require('../../assests/Img/kttend.jpg'),
+        ],
+        caption: 'Loving this day at the beach 🏖️',
+        likes: 78921,
+        comments: 311,
+        shares: 54,
+        isLiked: false,
+        timestamp: new Date('2024-10-07T13:30:00Z'),
+    },
+    {
+        id: 3,
+        username: 'janedoe',
+        tick: false,
+        isfollow: true,
+        avatar: require('../../assests/Img/glasses.jpg'),
+        images: [
+            require('../../assests/Img/kttend.jpg'),
+            require('../../assests/Img/glasses.jpg'),
+        ],
+        caption: 'call us what we are  dvhosdv ;SV: SV SKV SIDvdjs shvisoiv sdv',
+        likes: 894,
+        comments: 311,
+        shares: 54,
+        isLiked: false,
+        timestamp: new Date('2024-12-07T13:30:00Z'),
+    },
+];
 
 
 function HomeScreen() {
     const { theme } = useTheme();
-    const posts = [
-        {
-            id: 1,
-            username: 'roses_are_rosie',
-            tick: true,
-            isfollow: false,
-            avatar: require('../../assests/Img/glasses.jpg'),
-            images: [
-                require('../../assests/Img/kttend.jpg'),
-                require('../../assests/Img/glasses.jpg'),
-                require('../../assests/Img/glasses.jpg'),
-                require('../../assests/Img/glasses.jpg'),
-            ],
-            caption: 'call us what we are  dvhosdv ;SV: SV SKV SIDvdjs shvisoiv sdv',
-            likes: 1219,
-            comments: 311,
-            shares: 5,
-            isLiked: false,
-            timestamp: new Date('2024-12-05T13:30:00Z'),
-        },
-        {
-            id: 2,
-            username: 'lia_loves___',
-            tick: true,
-            isfollow: false,
-            avatar: require('../../assests/Img/glasses.jpg'),
-            images: [
-                require('../../assests/Img/kttend.jpg'),
-            ],
-            caption: 'Loving this day at the beach 🏖️',
-            likes: 78921,
-            comments: 311,
-            shares: 54,
-            isLiked: false,
-            timestamp: new Date('2024-10-07T13:30:00Z'),
-        },
-        {
-            id: 3,
-            username: 'janedoe',
-            tick: false,
-            isfollow: true,
-            avatar: require('../../assests/Img/glasses.jpg'),
-            images: [
-                require('../../assests/Img/kttend.jpg'),
-                require('../../assests/Img/glasses.jpg'),
-            ],
-            caption: 'call us what we are  dvhosdv ;SV: SV SKV SIDvdjs shvisoiv sdv',
-            likes: 894,
-            comments: 311,
-            shares: 54,
-            isLiked: false,
-            timestamp: new Date('2024-12-07T13:30:00Z'),
-        },
-    ];
-
+    
     const renderHeader = () => (
         <>
             <HeaderView />
